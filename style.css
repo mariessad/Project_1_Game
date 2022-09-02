@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: space-between;
+  background-color: rgba(57, 166, 255, 0.815);
+}
+
+.title {
+  text-align: center;
+  margin: 1rem;
+}
+.game-score {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem;
+}
+.scores-div {
+  margin: 1rem;
+}
+
+.score-title {
+  margin-right: 0.5rem;
+}
+#canvas-1 {
+  outline: 2px solid purple;
+  border-radius: 0.5rem;
+  width: 800px;
+  height: 400px;
+  margin: auto;
+}
+
+.buttons-div {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
+#start-button {
+  width: 100px;
+  height: 50px;
+  margin: 0.5rem;
+}
+#restart-button {
+  width: 100px;
+  height: 50px;
+  margin: 0.5rem;
+}
