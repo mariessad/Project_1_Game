@@ -143,14 +143,44 @@ class Bubble {
     // bubble goes up and down on y axis, at a random speed
     this.y -= this.speed;
   }
+  draw() {
+    context.fillStyle = "blue";
+    context.beginPath();
+    // circle shape
+    context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    // fill the circle
+    context.fill();
+    // close the path
+    context.closePath();
+    context.stroke();
+  }
+}
+
+function handleBubbles() {
+  // run this code every 50 frames
+  if (gameFrame % 50 === 0) {
+    // add a new bubble to the bubles array
+    bubblesArr.push(new Bubble());
+  }
+  //   loop through bubbles array and call the update and draw method for each bubble
+  for (let i = 0; i < bubblesArr.length; i++) {
+    bubblesArr[i].update();
+    bubblesArr[i].draw();
+  }
 }
 
 // animation loop
 function animation() {
   // clear canvas after each frame
   context.clearRect(0, 0, canvas.width, canvas.height);
+  //   invoke bubbles function to add a bubble every 50 frames
+  handleBubbles();
   player.updatePosition();
   player.draw();
+  //   increment the game frame, increases endlessly as game runs
+  //   use to add periodic events to game
+  gameFrame++;
+  //   console.log(gameFrame);
   //   built in JS method. Creates a recursive loop
   requestAnimationFrame(animation);
 }
