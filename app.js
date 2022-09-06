@@ -51,9 +51,9 @@ canvas.addEventListener("mousedown", function (e) {
   mouse.click = true;
   mouse.x = e.x - canvasLocation.left;
   mouse.y = e.y - canvasLocation.top;
-  console.log(e);
-  console.log(mouse.x);
-  console.log(mouse.y);
+  //   console.log(e);
+  //   console.log(mouse.x);
+  //   console.log(mouse.y);
 });
 canvas.addEventListener("mouseup", function (e) {
   // when your mouseclick ends, change to false
@@ -66,6 +66,10 @@ canvas.addEventListener("mouseup", function (e) {
 });
 
 // players
+const playerSprite1 = new Image();
+playerSprite1.src = "./images/mermaid-sprite.png";
+const playerSprite2 = new Image();
+playerSprite2.src = "";
 
 class Players {
   constructor() {
@@ -74,16 +78,16 @@ class Players {
     // use to position sprite character to face certain direction
     this.radius = 50;
     this.angle = 0;
-    // coordinates of currently displayed frame
+    // coordinates of currently displayed frame in spritesheet
     this.frameX = 0;
     this.frameY = 0;
     // keeps track of overall number of frames
     this.frame = 0;
     // width of single frame from character sprite sheet
     // divide pixel width by amount of columns
-    this.spriteWidth = 200;
+    this.spriteWidth = 32;
     // divide pixel height by amount of rows
-    this.spriteHeight = 200;
+    this.spriteHeight = 48;
   }
   //   method to update player position
   updatePosition() {
@@ -121,6 +125,20 @@ class Players {
     context.fill();
     context.closePath();
     context.fillRect(this.x, this.y, this.radius, 10);
+    // built in drawimage, can pass it 3, 5, or 9 arguments
+    // using 9 here, first is image you want to draw
+    //next 4 are the area to crop, last 4 define where you want image to go on canvas
+    context.drawImage(
+      playerSprite1,
+      this.frameX * this.spriteWidth,
+      this.frameY * this.spriteHeight,
+      this.spriteWidth,
+      this.spriteHeight,
+      this.x - 18,
+      this.y - 18,
+      this.spriteWidth,
+      this.spriteHeight
+    );
   }
 }
 
@@ -190,6 +208,12 @@ function handleBubbles() {
       //   console.log("collision");
       //   make sure the bubbles don't count for too many points on each collision
       if (!bubblesArr[i].counted) {
+        // bubble pop sounds
+        if (bubblesArr[i].sound === "sound1") {
+          bubbleSound1.play();
+        } else {
+          bubbleSound2.play();
+        }
         score1++;
         bubblesArr[i].counted = true;
         bubblesArr.splice(i--, 1);
