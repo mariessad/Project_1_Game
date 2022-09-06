@@ -139,6 +139,8 @@ class Bubble {
     this.speed = Math.random() * 5 + 1;
     this.distance;
     this.counted = false;
+    // bubble pop sounds, pick between two at random with ternanry operator
+    this.sound = Math.random() <= 0.5 ? "sound1" : "sound2";
   }
   //   collision detection
   update() {
@@ -161,6 +163,13 @@ class Bubble {
     context.stroke();
   }
 }
+
+// bubble pop sound elements
+
+const bubbleSound1 = document.createElement("audio");
+bubbleSound1.src = "./sounds/Plop.ogg";
+const bubbleSound2 = document.createElement("audio");
+bubbleSound2.src = "./sounds/bubbles-single3.wav";
 
 function handleBubbles() {
   // run this code every 50 frames
