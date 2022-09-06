@@ -138,6 +138,7 @@ class Bubble {
     // give random speed to each bubble
     this.speed = Math.random() * 5 + 1;
     this.distance;
+    this.counted = false;
   }
   //   collision detection
   update() {
@@ -177,7 +178,13 @@ function handleBubbles() {
     }
     // collision detection and bubble removal
     if (bubblesArr[i].distance < bubblesArr[i].radius + player.radius) {
-      console.log("collision");
+      //   console.log("collision");
+      //   make sure the bubbles don't count for too many points on each collision
+      if (!bubblesArr[i].counted) {
+        score1++;
+        bubblesArr[i].counted = true;
+        bubblesArr.splice(i--, 1);
+      }
     }
   }
 }
