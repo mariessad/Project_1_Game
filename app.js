@@ -12,7 +12,6 @@ const restartButton = document.getElementById("restart-button");
 const context = canvas.getContext("2d");
 
 // canvas height and width have to be the same here as CSS
-
 canvas.width = 800;
 canvas.hight = 500;
 
@@ -82,9 +81,9 @@ class Players {
     this.frame = 0;
     // width of single frame from character sprite sheet
     // divide pixel width by amount of columns
-    this.spriteWidth = 300;
+    this.spriteWidth = 200;
     // divide pixel height by amount of rows
-    this.spriteHeight = 300;
+    this.spriteHeight = 200;
   }
   //   method to update player position
   updatePosition() {
@@ -129,10 +128,12 @@ const player = new Players();
 
 // bubbles to pop
 const bubblesArr = [];
+
 class Bubble {
   constructor() {
     this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
+    // bubbles start from bottom, out of view
+    this.y = canvas.height + 100;
     this.radius = 50;
     // give random speed to each bubble
     this.speed = Math.random() * 5 + 1;
@@ -142,6 +143,10 @@ class Bubble {
   update() {
     // bubble goes up and down on y axis, at a random speed
     this.y -= this.speed;
+    // calcuate distance between player and bubble
+    const distanceX = this.x - player.x;
+    const distanceY = this.y - player.y;
+    this.distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
   }
   draw() {
     context.fillStyle = "blue";
@@ -166,6 +171,14 @@ function handleBubbles() {
   for (let i = 0; i < bubblesArr.length; i++) {
     bubblesArr[i].update();
     bubblesArr[i].draw();
+    // if bubble is out of canvas, splice it out, otherwise you'd have a huge array of bubbles
+    if (bubblesArr[i] < 0) {
+      bubblesArr.splice(i--, 1);
+    }
+    // collision detection and bubble removal
+    if (bubblesArr[i].distance < bubblesArr[i].radius + player.radius) {
+      console.log("collision");
+    }
   }
 }
 
