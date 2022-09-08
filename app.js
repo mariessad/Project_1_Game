@@ -14,7 +14,7 @@ const context = canvas.getContext("2d");
 
 // canvas height and width have to be the same here as CSS
 canvas.width = 800;
-canvas.hight = 500;
+canvas.height = 500;
 
 // initialze score for both players
 let score1 = 0;
@@ -149,6 +149,9 @@ function startGameFunc() {
   // bubbles to pop
   const bubblesArr = [];
 
+  const bubbleImage = new Image();
+  bubbleImage.src = "./images/bubble_pop_frame_01.png";
+
   class Bubble {
     constructor() {
       this.x = Math.random() * canvas.width;
@@ -181,6 +184,7 @@ function startGameFunc() {
       // close the path
       context.closePath();
       context.stroke();
+      context.drawImage(bubbleImage, this.x, this.y, this.radius, this.radius);
     }
   }
 
