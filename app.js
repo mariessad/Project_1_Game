@@ -224,11 +224,37 @@ function startGameFunc() {
       context.beginPath();
       context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       context.fill();
+      // built-in draw method, 3 5 or 9 arguments
+      context.drawImage(
+        enemyImage,
+        this.frameX * this.spriteWidth,
+        this.frameY * this.spriteHeight,
+        this.spriteWidth,
+        this.spriteHeight,
+        this.x - 55,
+        this.y - 55,
+        this.spriteWidth / 4,
+        this.spriteHeight / 4
+      );
     }
-    update(){
+    update() {
       this.x -= this.speed;
-      
+      // move enemy from right to left
+      // if enemy dissapears on edge of canvas, reposition back to other side
+      if (this.x < 0 - this.radius * 2) {
+        this.x = canvas.width + 200;
+        this.y = Math.random() * (canvas.height - 150) + 90;
+        this.speed = Math.random() * 2 + 2;
+      }
     }
+  }
+
+  // create instance of enemy
+  const enemy1 = new Enemy();
+  // enemy function that invokes update and draw method
+  function enemyHandler() {
+    enemy1.update();
+    enemy1.draw();
   }
 
   // bubble pop sound elements
@@ -279,6 +305,7 @@ function startGameFunc() {
     handleBubbles();
     player.updatePosition();
     player.draw();
+    enemyHandler();
     //   increment the game frame, increases endlessly as game runs
     //   use to add periodic events to game
     gameFrame++;
