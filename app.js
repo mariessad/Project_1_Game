@@ -19,16 +19,8 @@ canvas.hight = 500;
 // initialze score for both players
 let score1 = 0;
 let score2 = 0;
-
-// The Element.getBoundingClientRect() method returns a DOMRect object,
-// providing information about the size of an element and its position relative to the viewport.
-// Need this to make sure we get the appriate numbers from mousedown event relative to canvas element
-
-// console.log(canvasLocation);
-
-// mouse object ability to use the mouse to play game
-// do I want to use the mouse to control this game or keyboard?
-//decide later, try with mouse controls for now
+const player1Score = (document.getElementById("score-1").innerText = score1);
+const player2Score = (document.getElementById("score-2").innerText = score2);
 
 // add event listener to canvas,
 // referring to the canvas cross axis created above,
@@ -40,7 +32,13 @@ startButton.addEventListener("click", startGameFunc);
 function startGameFunc() {
   let gameFrame = 0;
 
+  // The Element.getBoundingClientRect() method returns a DOMRect object,
+  // providing information about the size of an element and its position relative to the viewport.
+  // Need this to make sure we get the appriate numbers from mousedown event relative to canvas element
+
   let canvasLocation = canvas.getBoundingClientRect();
+
+  // mouse object ability to use the mouse to play game
 
   const mouse = {
     // gives a cross axis by dividing the canvas
