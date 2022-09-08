@@ -175,16 +175,59 @@ function startGameFunc() {
       this.distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
     }
     draw() {
-      context.fillStyle = "blue";
+      // context.fillStyle = "blue";
+      // context.beginPath();
+      // // circle shape
+      // context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      // // fill the circle
+      // context.fill();
+      // // close the path
+      // context.closePath();
+      // context.stroke();
+      // add first bubble image, offset x + y to make sure bubble is corectly over collision area
+      context.drawImage(
+        bubbleImage,
+        this.x - 65,
+        this.y - 65,
+        this.radius * 2.5,
+        this.radius * 2.6
+      );
+    }
+  }
+
+  // enemies
+
+  const enemyImage = new Image();
+  enemyImage.src = "./images/enemy_fish_pink.png";
+
+  // enemy contructor
+
+  class Enemy {
+    constructor() {
+      // where enemy is placed on canvas
+      // offscreen to start on X axis
+      this.x = canvas.width + 200;
+      // random position on Y axis
+      this.y = Math.random() * canvas.height - 150;
+      this.radius = 60;
+      this.speed = Math.random() * 2 + 2;
+      this.frame = 0;
+      this.frameX = 0;
+      this.frameY = 0;
+      // depends on your sprite sheet dimensions divided by # of rows and # of columns
+      this.spriteWidth = 418;
+      this.spriteHeight = 397;
+    }
+    //collision area for enemy
+    draw() {
+      context.fillStyle = "red";
       context.beginPath();
-      // circle shape
       context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      // fill the circle
       context.fill();
-      // close the path
-      context.closePath();
-      context.stroke();
-      context.drawImage(bubbleImage, this.x, this.y, this.radius, this.radius);
+    }
+    update(){
+      this.x -= this.speed;
+      
     }
   }
 
