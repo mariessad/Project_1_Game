@@ -15,6 +15,7 @@ body {
 .title {
   text-align: center;
   margin: 1rem;
+  font-family: "Pacifico", sans-serif;
 }
 .game-score {
   display: flex;
