@@ -22,6 +22,7 @@ body {
   width: 100px;
   height: auto;
   margin: 0;
+  filter: invert();
 }
 .game-score {
   display: flex;
@@ -34,9 +35,10 @@ body {
 
 .score-title {
   margin-right: 0.5rem;
+  color: #aa1bbd;
 }
 #canvas-1 {
-  outline: 2px solid purple;
+  outline: 2px solid rgb(255, 255, 255);
   border-radius: 0.5rem;
   /* width: 800px;
   height: 500px; */
@@ -51,17 +53,53 @@ body {
 }
 
 #start-button {
-  width: 100px;
-  height: 50px;
+  width: 160px;
+  height: 60px;
   margin: 0.5rem;
+  margin-right: 1.5rem;
 }
 #restart-button {
-  width: 100px;
-  height: 50px;
+  width: 120px;
+  height: 60px;
   margin: 0.5rem;
 }
 
 .instructions {
   text-align: center;
   margin-top: 2rem;
+}
+
+button {
+  width: 9em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 19px;
+  font-family: "Pacifico";
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px rgba(57, 166, 255, 0.363);
+}
+
+button::before {
+  content: "";
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right, #f19dfc 0%, #f9f047 100%);
+  transition: 0.5s ease;
+  display: block;
+  z-index: -1;
+}
+
+button:hover::before {
+  width: 9em;
+}
+
+button:hover {
+  color: purple;
 }

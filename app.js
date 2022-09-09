@@ -294,17 +294,15 @@ function startGameFunc() {
     if (level === 1) {
       context.fillText("Level One Over", 120, 100);
       level++;
-    }
-    if (level === 2) {
+    } else if (level === 2) {
       context.fillText("Level Two Over", 120, 200);
       level++;
-    }
-    if (level === 3) {
+    } else if (level === 3) {
       context.fillText("Level Three Over", 120, 200);
       level++;
-    }
-    if (level === 4) {
+    } else if (level === 4) {
       context.fillText("GAME OVER", 120, 300);
+
       if (player1Score > player2Score) {
         context.fillText("Player 1 Wins With a Score of " + score1, 120, 250);
       } else if (player2Score > player1Score) {
@@ -315,7 +313,6 @@ function startGameFunc() {
         console.log("error");
       }
     }
-
     gameOver = true;
   }
 
