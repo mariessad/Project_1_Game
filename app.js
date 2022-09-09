@@ -24,6 +24,20 @@ const player2Score = (document.getElementById("score-2").innerText = score2);
 
 gameOver = false;
 
+// levels
+const level = 3;
+
+// change level background for each level
+if (level === 2) {
+  canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
+}
+if (level === 3) {
+  canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
+  canvas.style.backgroundSize = "800px 500px";
+}
+
+document.getElementById("round-1").innerText = level;
+
 // add event listener to canvas,
 // referring to the canvas cross axis created above,
 // gives ability  to track exactly where the mouse is clicking on the canvas element
