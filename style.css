@@ -17,6 +17,12 @@ body {
   margin: 1rem;
   font-family: "Pacifico", sans-serif;
 }
+
+.title-img {
+  width: 100px;
+  height: auto;
+  margin: 0;
+}
 .game-score {
   display: flex;
   justify-content: center;

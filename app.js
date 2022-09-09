@@ -17,15 +17,15 @@ canvas.width = 800;
 canvas.height = 500;
 
 // initialze score for both players
-let score1 = 0;
+let score1 = 1;
 let score2 = 0;
-const player1Score = (document.getElementById("score-1").innerText = score1);
-const player2Score = (document.getElementById("score-2").innerText = score2);
+let player1Score = document.getElementById("score-1");
+let player2Score = document.getElementById("score-2");
 
 gameOver = false;
 
 // levels
-const level = 3;
+let level = 1;
 
 // change level background for each level
 if (level === 2) {
@@ -290,8 +290,31 @@ function startGameFunc() {
   function gameOverFunc() {
     context.fillStyle = "white";
     context.font = "40px Arial";
-    // requires three arguments
-    context.fillText("GAME OVER, Final score: " + score1, 120, 200);
+    //  game levels shown on canvas
+    if (level === 1) {
+      context.fillText("Level One Over", 120, 100);
+      level++;
+    }
+    if (level === 2) {
+      context.fillText("Level Two Over", 120, 200);
+      level++;
+    }
+    if (level === 3) {
+      context.fillText("Level Three Over", 120, 200);
+      level++;
+    }
+    if (level === 4) {
+      context.fillText("GAME OVER", 120, 300);
+      if (player1Score > player2Score) {
+        context.fillText("Player 1 Wins With a Score of " + score1, 120, 250);
+      } else if (player2Score > player1Score) {
+        context.fillText("Player 2 Wins With a Score of " + score2, 120, 250);
+      } else if (player1Score === player2Score) {
+        context.fillText("It's a Tie!", 120, 400);
+      } else {
+        console.log("error");
+      }
+    }
 
     gameOver = true;
   }
@@ -328,7 +351,7 @@ function startGameFunc() {
           } else {
             bubbleSound2.play();
           }
-          score1++;
+          player1Score.innerText = score1++;
           bubblesArr[i].counted = true;
           bubblesArr.splice(i--, 1);
         }
