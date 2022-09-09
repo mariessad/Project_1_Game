@@ -22,6 +22,8 @@ let score2 = 0;
 const player1Score = (document.getElementById("score-1").innerText = score1);
 const player2Score = (document.getElementById("score-2").innerText = score2);
 
+gameOver = false;
+
 // add event listener to canvas,
 // referring to the canvas cross axis created above,
 // gives ability  to track exactly where the mouse is clicking on the canvas element
@@ -251,6 +253,14 @@ function startGameFunc() {
       this.frameY += this.frameX == 4 ? 1 : 0;
       this.frameX %= 4;
       this.frameY %= 3;
+      // enemy collision with player - calculate distance between two center points, compare to radius of circle
+      const distanceX = this.x - player.x;
+      const distanceY = this.y - player.y;
+      // use pythagorean theorem to calculate (a squared + b squared = c squared)
+      const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+      if (distance < this.radius + player.radius) {
+        gameOverFunc();
+      }
     }
   }
 
@@ -258,8 +268,18 @@ function startGameFunc() {
   const enemy1 = new Enemy();
   // enemy function that invokes update and draw method
   function enemyHandler() {
-    enemy1.update();
     enemy1.draw();
+    enemy1.update();
+  }
+
+  // game over func
+  function gameOverFunc() {
+    context.fillStyle = "white";
+    context.font = "40px Arial";
+    // requires three arguments
+    context.fillText("GAME OVER, Final score: " + score1, 120, 200);
+
+    gameOver = true;
   }
 
   // bubble pop sound elements
@@ -314,9 +334,10 @@ function startGameFunc() {
     //   increment the game frame, increases endlessly as game runs
     //   use to add periodic events to game
     gameFrame++;
-    //   console.log(gameFrame);
-    //   built in JS method. Creates a recursive loop
-    requestAnimationFrame(animation);
+    // if game over = false, freeze the game animation
+    if (!gameOver)
+      //   built in JS method. Creates a recursive loop
+      requestAnimationFrame(animation);
   }
 
   animation();
