@@ -246,6 +246,11 @@ function startGameFunc() {
         this.y = Math.random() * (canvas.height - 150) + 90;
         this.speed = Math.random() * 2 + 2;
       }
+      // show each sprite sheet image at a different frame point, animating the enemy fish
+      this.frameX++;
+      this.frameY += this.frameX == 4 ? 1 : 0;
+      this.frameX %= 4;
+      this.frameY %= 3;
     }
   }
 
