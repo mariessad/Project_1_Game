@@ -28,15 +28,13 @@ gameOver = false;
 let level = 1;
 
 // change level background for each level
-if (level === 2) {
-  canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
-}
-if (level === 3) {
-  canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
-  canvas.style.backgroundSize = "800px 500px";
-}
-
-document.getElementById("round-1").innerText = level;
+// if (level === 2) {
+//   canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
+// }
+// if (level === 3) {
+//   canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
+//   canvas.style.backgroundSize = "800px 500px";
+// }
 
 // add event listener to canvas,
 // referring to the canvas cross axis created above,
@@ -293,15 +291,22 @@ function startGameFunc() {
     //  game levels shown on canvas
     if (level === 1) {
       context.fillText("Level One Over", 120, 100);
+      canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
       level++;
     } else if (level === 2) {
       context.fillText("Level Two Over", 120, 200);
+      canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
+      canvas.style.backgroundSize = "800px 500px";
+      const enemy2 = new Enemy();
+      function enemyHandler() {
+        enemy2.draw();
+        enemy2.update();
+      }
+      enemyHandler();
       level++;
     } else if (level === 3) {
-      context.fillText("Level Three Over", 120, 200);
-      level++;
-    } else if (level === 4) {
       context.fillText("GAME OVER", 120, 300);
+      level++;
 
       if (player1Score > player2Score) {
         context.fillText("Player 1 Wins With a Score of " + score1, 120, 250);
@@ -372,7 +377,11 @@ function startGameFunc() {
     if (!gameOver)
       //   built in JS method. Creates a recursive loop
       requestAnimationFrame(animation);
+    if (level < 4) gameOver = false;
   }
 
   animation();
+  
+  // show current round number
+  document.getElementById("round-1").innerText = level;
 }
