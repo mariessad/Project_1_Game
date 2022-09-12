@@ -22,6 +22,7 @@ let score2 = 0;
 let player1Score = document.getElementById("score-1");
 let player2Score = document.getElementById("score-2");
 
+player2Switch = false;
 gameOver = false;
 
 // levels
@@ -77,7 +78,7 @@ function startGameFunc() {
   playerSprite1.src = "./images/mermaid-art.png";
 
   const playerSprite2 = new Image();
-  playerSprite2.src = "";
+  playerSprite2.src = "./images/merman-art.png";
 
   class Players {
     constructor(spriteImg) {
@@ -158,6 +159,7 @@ function startGameFunc() {
   }
 
   const player = new Players(playerSprite1);
+  const player2 = new Players(playerSprite2);
 
   // bubbles to pop
   const bubblesArr = [];
@@ -216,6 +218,8 @@ function startGameFunc() {
   enemyImage2.src = "./images/Jellyfish.png";
   const enemyImage3 = new Image();
   enemyImage3.src = "./images/enemy_fish_yellow.png";
+  const enemyImage4 = new Image();
+  enemyImage4.src = "./images/Jellyfish.png";
 
   // enemy contructor
 
@@ -299,6 +303,11 @@ function startGameFunc() {
     enemy3.draw();
     enemy3.update();
   }
+  const enemy4 = new Enemy(enemyImage4);
+  function enemyHandler4() {
+    enemy4.draw();
+    enemy4.update();
+  }
 
   // game over func
   function gameOverFunc() {
@@ -306,20 +315,39 @@ function startGameFunc() {
     context.font = "40px Arial";
     //  game levels shown on canvas
     if (level === 1) {
-      context.fillText("Level One Over", 120, 100);
-      canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
+      setTimeout(() => {
+        context.fillText("Level 2, Press Play to start level", 120, 100),
+          (canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')");
+      }, 1000);
+
       level++;
     } else if (level === 2) {
-      context.fillText("Level Two Over", 120, 200);
-      canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
-      canvas.style.backgroundSize = "800px 500px";
-      console.log("2nd enemy appears");
-
+      setTimeout(() => {
+        context.fillText("Level 3, Press Play to start level", 120, 200);
+        canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
+        canvas.style.backgroundSize = "800px 500px";
+      }, 1000);
       level++;
     } else if (level === 3) {
-      context.fillText("GAME OVER", 120, 300);
+      setTimeout(() => {
+        context.fillText("Player 2 Start, Press Play", 120, 200);
+        canvas.style.backgroundImage = "url('./images/water-bg-1.jpg')";
+      }, 1000);
       level++;
-
+    } else if (level === 4) {
+      setTimeout(() => {
+        context.fillText("Level 2, Press Play to start level", 120, 200);
+        canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
+      }, 1000);
+      level++;
+    } else if (level === 5) {
+      setTimeout(() => {
+        context.fillText("Level 3, Press Play to start level", 120, 200);
+        canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
+      }, 1000);
+      level++;
+    } else if (level >= 6) {
+      context.fillText("GAME OVER", 120, 300);
       if (player1Score > player2Score) {
         context.fillText("Player 1 Wins With a Score of " + score1, 120, 250);
       } else if (player2Score > player1Score) {
@@ -336,9 +364,9 @@ function startGameFunc() {
   // bubble pop sound elements
 
   const bubbleSound1 = document.createElement("audio");
-  // bubbleSound1.src = "./sounds/Plop.ogg";
+  bubbleSound1.src = "./sounds/Plop.ogg";
   const bubbleSound2 = document.createElement("audio");
-  // bubbleSound2.src = "./sounds/bubbles-single3.wav";
+  bubbleSound2.src = "./sounds/bubbles-single3.wav";
 
   function handleBubbles() {
     // run this code every 50 frames
@@ -379,9 +407,11 @@ function startGameFunc() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     //   invoke bubbles function to add a bubble every 50 frames
     handleBubbles();
-    player.updatePosition();
-    player.draw();
-    enemyHandler();
+    if (level < 4) {
+      player.updatePosition();
+      player.draw();
+      enemyHandler();
+    }
 
     if (level === 2) {
       // add another enemy for level2 //
@@ -391,6 +421,19 @@ function startGameFunc() {
     if (level === 3) {
       enemyHandler3();
     }
+    if (level === 4 || player2Switch === true) {
+      player2Switch = true;
+      player2.updatePosition();
+      player2.draw();
+      enemyHandler();
+    }
+    if (level === 5) {
+      enemyHandler2();
+    }
+    if (level === 6) {
+      enemyHandler3();
+      enemyHandler4();
+    }
 
     //   increment the game frame, increases endlessly as game runs
     //   use to add periodic events to game
@@ -399,7 +442,7 @@ function startGameFunc() {
     if (!gameOver)
       //   built in JS method. Creates a recursive loop
       requestAnimationFrame(animation);
-    if (level < 4) gameOver = false;
+    if (level < 7) gameOver = false;
   }
 
   animation();
