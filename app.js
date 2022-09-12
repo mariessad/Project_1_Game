@@ -74,13 +74,13 @@ function startGameFunc() {
 
   // players
   const playerSprite1 = new Image();
-  playerSprite1.src = "./images/mermaid-sprite.png";
+  playerSprite1.src = "./images/mermaid-art.png";
 
   const playerSprite2 = new Image();
   playerSprite2.src = "";
 
   class Players {
-    constructor() {
+    constructor(spriteImg) {
       this.x = canvas.width;
       this.y = canvas.height / 2;
       // use to position sprite character to face certain direction
@@ -93,9 +93,10 @@ function startGameFunc() {
       this.frame = 0;
       // width of single frame from character sprite sheet
       // divide pixel width by amount of columns
-      this.spriteWidth = 32;
+      this.spriteWidth = 182;
       // divide pixel height by amount of rows
-      this.spriteHeight = 48;
+      this.spriteHeight = 332;
+      this.spriteImg = spriteImg;
     }
     //   method to update player position
     updatePosition() {
@@ -127,36 +128,36 @@ function startGameFunc() {
         context.stroke();
       }
       // player chacter sans sprite
-      context.fillStyle = "purple";
-      context.beginPath();
+      // context.fillStyle = "purple";
+      // context.beginPath();
       context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      context.fill();
-      context.closePath();
-      context.fillRect(this.x, this.y, this.radius, 10);
+      // context.fill();
+      // context.closePath();
+      // context.fillRect(this.x, this.y, this.radius, 10);
       // animate the spritesheet
-      this.frameX++;
-      this.frameY += this.frameX == 4 ? 1 : 0;
-      this.frameX %= 4;
-      this.frameY %= 3;
+      // this.frameX++;
+      // this.frameY += this.frameX == 4 ? 1 : 0;
+      // this.frameX %= 4;
+      // this.frameY %= 3;
       // built in drawimage, can pass it 3, 5, or 9 arguments
       // using 9 here, first is image you want to draw
       //next 4 are the area to crop, last 4 define where you want image to go on canvas
 
       context.drawImage(
-        playerSprite1,
+        this.spriteImg,
         this.frameX * this.spriteWidth,
         this.frameY * this.spriteHeight,
         this.spriteWidth,
         this.spriteHeight,
-        this.x - 18,
-        this.y - 18,
+        this.x - 40,
+        this.y - 60,
         this.spriteWidth,
         this.spriteHeight
       );
     }
   }
 
-  const player = new Players();
+  const player = new Players(playerSprite1);
 
   // bubbles to pop
   const bubblesArr = [];
@@ -211,11 +212,11 @@ function startGameFunc() {
 
   const enemyImage = new Image();
   enemyImage.src = "./images/enemy_fish_pink.png";
-
   const enemyImage2 = new Image();
   enemyImage2.src = "./images/Jellyfish.png";
   const enemyImage3 = new Image();
   enemyImage3.src = "./images/enemy_fish_yellow.png";
+
   // enemy contructor
 
   class Enemy {
@@ -281,6 +282,7 @@ function startGameFunc() {
   }
 
   // create instance of enemy
+
   const enemy1 = new Enemy(enemyImage);
   // enemy function that invokes update and draw method
   function enemyHandler() {
@@ -306,7 +308,6 @@ function startGameFunc() {
     if (level === 1) {
       context.fillText("Level One Over", 120, 100);
       canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
-      // enemyHandler2();
       level++;
     } else if (level === 2) {
       context.fillText("Level Two Over", 120, 200);
