@@ -9,6 +9,6 @@ when the player hits an enemy, that round stops and moves on to the next round.
 
 winner with the greatest number of points is determined after both players finish their rounds
 
-Built with HTML CSS JavaScript
+Built with HTML CSS JavaScript, first time using JS Canvas
 
 player images are custom artwork made with procreate on the Ipad
