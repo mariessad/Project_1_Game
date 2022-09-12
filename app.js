@@ -34,7 +34,10 @@ let level = 1;
 // measures distance from browser window, so have to minus canvas position from browser
 // there is a JS method - getBoundingClientRect()
 startButton.addEventListener("click", startGameFunc);
-
+restartButton.addEventListener("click", reload);
+function reload() {
+  location.reload();
+}
 function startGameFunc() {
   let gameFrame = 0;
 
@@ -398,6 +401,21 @@ function startGameFunc() {
           bubblesArr.splice(i--, 1);
         }
       }
+      // if (bubblesArr[i].distance < bubblesArr[i].radius + player2.radius) {
+      //   //   console.log("collision");
+      //   //   make sure the bubbles don't count for too many points on each collision
+      //   if (!bubblesArr[i].counted) {
+      //     // bubble pop sounds
+      //     if (bubblesArr[i].sound === "sound1") {
+      //       bubbleSound1.play();
+      //     } else {
+      //       bubbleSound2.play();
+      //     }
+      //     player2Score.innerText = score2++;
+      //     bubblesArr[i].counted = true;
+      //     bubblesArr.splice(i--, 1);
+      //   }
+      // }
     }
   }
 
