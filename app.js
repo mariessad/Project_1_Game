@@ -27,15 +27,6 @@ gameOver = false;
 // levels
 let level = 1;
 
-// change level background for each level
-// if (level === 2) {
-//   canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
-// }
-// if (level === 3) {
-//   canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
-//   canvas.style.backgroundSize = "800px 500px";
-// }
-
 // add event listener to canvas,
 // referring to the canvas cross axis created above,
 // gives ability  to track exactly where the mouse is clicking on the canvas element
@@ -84,6 +75,7 @@ function startGameFunc() {
   // players
   const playerSprite1 = new Image();
   playerSprite1.src = "./images/mermaid-sprite.png";
+
   const playerSprite2 = new Image();
   playerSprite2.src = "";
 
@@ -141,9 +133,15 @@ function startGameFunc() {
       context.fill();
       context.closePath();
       context.fillRect(this.x, this.y, this.radius, 10);
+      // animate the spritesheet
+      this.frameX++;
+      this.frameY += this.frameX == 4 ? 1 : 0;
+      this.frameX %= 4;
+      this.frameY %= 3;
       // built in drawimage, can pass it 3, 5, or 9 arguments
       // using 9 here, first is image you want to draw
       //next 4 are the area to crop, last 4 define where you want image to go on canvas
+
       context.drawImage(
         playerSprite1,
         this.frameX * this.spriteWidth,
@@ -214,10 +212,14 @@ function startGameFunc() {
   const enemyImage = new Image();
   enemyImage.src = "./images/enemy_fish_pink.png";
 
+  const enemyImage2 = new Image();
+  enemyImage2.src = "./images/Jellyfish.png";
+  const enemyImage3 = new Image();
+  enemyImage3.src = "./images/enemy_fish_yellow.png";
   // enemy contructor
 
   class Enemy {
-    constructor() {
+    constructor(spriteImg) {
       // where enemy is placed on canvas
       // offscreen to start on X axis
       this.x = canvas.width + 200;
@@ -231,16 +233,18 @@ function startGameFunc() {
       // depends on your sprite sheet dimensions divided by # of rows and # of columns
       this.spriteWidth = 418;
       this.spriteHeight = 397;
+      this.spriteImg = spriteImg;
     }
     //collision area for enemy
     draw() {
-      context.fillStyle = "red";
+      // context.fillStyle = "red";
       context.beginPath();
       context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      context.fill();
+      // context.fill();
       // built-in draw method, 3 5 or 9 arguments
       context.drawImage(
-        enemyImage,
+        // enemyImage,
+        this.spriteImg,
         this.frameX * this.spriteWidth,
         this.frameY * this.spriteHeight,
         this.spriteWidth,
@@ -277,11 +281,21 @@ function startGameFunc() {
   }
 
   // create instance of enemy
-  const enemy1 = new Enemy();
+  const enemy1 = new Enemy(enemyImage);
   // enemy function that invokes update and draw method
   function enemyHandler() {
     enemy1.draw();
     enemy1.update();
+  }
+  const enemy2 = new Enemy(enemyImage2);
+  function enemyHandler2() {
+    enemy2.draw();
+    enemy2.update();
+  }
+  const enemy3 = new Enemy(enemyImage3);
+  function enemyHandler3() {
+    enemy3.draw();
+    enemy3.update();
   }
 
   // game over func
@@ -292,17 +306,14 @@ function startGameFunc() {
     if (level === 1) {
       context.fillText("Level One Over", 120, 100);
       canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
+      // enemyHandler2();
       level++;
     } else if (level === 2) {
       context.fillText("Level Two Over", 120, 200);
       canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
       canvas.style.backgroundSize = "800px 500px";
-      const enemy2 = new Enemy();
-      function enemyHandler() {
-        enemy2.draw();
-        enemy2.update();
-      }
-      enemyHandler();
+      console.log("2nd enemy appears");
+
       level++;
     } else if (level === 3) {
       context.fillText("GAME OVER", 120, 300);
@@ -370,6 +381,16 @@ function startGameFunc() {
     player.updatePosition();
     player.draw();
     enemyHandler();
+
+    if (level === 2) {
+      // add another enemy for level2 //
+      console.log("2nd enemy appears");
+      enemyHandler2();
+    }
+    if (level === 3) {
+      enemyHandler3();
+    }
+
     //   increment the game frame, increases endlessly as game runs
     //   use to add periodic events to game
     gameFrame++;
@@ -381,7 +402,7 @@ function startGameFunc() {
   }
 
   animation();
-  
+
   // show current round number
   document.getElementById("round-1").innerText = level;
 }
