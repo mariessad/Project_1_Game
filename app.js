@@ -59,21 +59,16 @@ function startGameFunc() {
 
   canvas.addEventListener("mousedown", function (e) {
     // when you click the mouse, changes from default false in mouse object to true
+
     mouse.click = true;
     mouse.x = e.x - canvasLocation.left;
     mouse.y = e.y - canvasLocation.top;
-    //   console.log(e);
-    //   console.log(mouse.x);
-    //   console.log(mouse.y);
   });
   canvas.addEventListener("mouseup", function (e) {
     // when your mouseclick ends, change to false
     mouse.click = false;
     mouse.x = e.x - canvasLocation.left;
     mouse.y = e.y - canvasLocation.top;
-    //   console.log(e);
-    //   console.log(mouse.x);
-    //   console.log(mouse.y);
   });
 
   // players
@@ -119,7 +114,7 @@ function startGameFunc() {
     //  draw method
     draw() {
       if (mouse.click) {
-        context.lineWidth = 0.2;
+        context.lineWidth = 0.1;
         // This method of the Canvas 2D API starts a new path,
         // by emptying the list of sub-paths.
         // Call this method when you want to create a new path.
@@ -173,7 +168,7 @@ function startGameFunc() {
   const bubbleImage2 = new Image();
   bubbleImage2.src = "./images/bubble_pop_frame_01.png";
   class Bubble {
-    constructor(spriteImg) {
+    constructor(spriteImg, playerNum) {
       this.x = Math.random() * canvas.width;
       // bubbles start from bottom, out of view
       this.y = canvas.height + 100;
@@ -185,14 +180,17 @@ function startGameFunc() {
       // bubble pop sounds, pick between two at random with ternanry operator
       this.sound = Math.random() <= 0.5 ? "sound1" : "sound2";
       this.spriteImg = spriteImg;
+      this.playerNum = playerNum;
     }
     //   collision detection
     update() {
       // bubble goes up and down on y axis, at a random speed
       this.y -= this.speed;
       // calcuate distance between player and bubble
-      const distanceX = this.x - player.x;
-      const distanceY = this.y - player.y;
+
+      console.log("bubble update 1");
+      const distanceX = this.x - this.playerNum.x;
+      const distanceY = this.y - this.playerNum.y;
       this.distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
     }
     draw() {
@@ -205,7 +203,7 @@ function startGameFunc() {
       // // close the path
       // context.closePath();
       // context.stroke();
-      // add first bubble image, offset x + y to make sure bubble is corectly over collision area
+      // add bubble image, offset x + y to make sure bubble is corectly over collision area
       context.drawImage(
         this.spriteImg,
         this.x - 65,
@@ -325,7 +323,6 @@ function startGameFunc() {
         context.fillText("Level 2, Press Play to start level", 120, 100),
           (canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')");
       }, 1000);
-
       level++;
     } else if (level === 2) {
       setTimeout(() => {
@@ -352,33 +349,35 @@ function startGameFunc() {
       console.log(`level ${level}`);
       setTimeout(() => {
         context.fillText("Level 6, Press Play to start level", 120, 200);
-        canvas.style.backgroundImage = "url('./images/water-bg-3.jpg')";
       }, 1000);
       level++;
     } else if (level > 5) {
       console.log(`level ${level}`);
-      console.log(`game over ${score1}${score2}`);
+      console.log(`game over ${score1} ${score2}`);
+      context.clearRect(0, 0, canvas.width, canvas.height);
       context.fillText("GAME OVER", 120, 300);
-      canvas.style.backgroundColor = "pink";
+      canvas.style.backgroundImage =
+        "url('./images/pink-background-sprites.jpg')";
+
       if (score1 > score2) {
         console.log("scores time");
         context.fillText(
           "Player 1 Wins With a Score of " + (score1 - 1),
           120,
-          200
+          100
         );
       }
       if (score2 > score1) {
         context.fillText(
           "Player 2 Wins With a Score of " + (score2 - 1),
           120,
-          200
+          100
         );
       }
       if (score1 === score2) {
-        context.fillText("It's a Tie! Score:" + (score2 - 1), 120, 200);
+        context.fillText("It's a Tie! Score: " + (score2 - 1), 120, 100);
       } else {
-        console.log("error");
+        // console.log("error");
       }
     }
     gameOver = true;
@@ -396,7 +395,7 @@ function startGameFunc() {
     if (gameFrame % 50 === 0 && player2Switch === false) {
       console.log("player 1 bubbles");
       // add a new bubble to the bubles array
-      bubblesArr.push(new Bubble(bubbleImage));
+      bubblesArr.push(new Bubble(bubbleImage, player));
     }
     //   loop through bubbles array and call the update and draw method for each bubble
     if (player2Switch === false) {
@@ -409,7 +408,6 @@ function startGameFunc() {
         }
         // collision detection and bubble removal
         if (bubblesArr[i].distance < bubblesArr[i].radius + player.radius) {
-          //   console.log("collision");
           //   make sure the bubbles don't count for too many points on each collision
           if (!bubblesArr[i].counted) {
             // bubble pop sounds
@@ -429,7 +427,7 @@ function startGameFunc() {
     if (gameFrame % 50 === 0 && player2Switch === true) {
       // add a new bubble to the bubles array
       console.log("player 2 bubbles should start");
-      bubblesArr1.push(new Bubble(bubbleImage2));
+      bubblesArr1.push(new Bubble(bubbleImage2, player2));
     }
     //   loop through bubbles array and call the update and draw method for each bubble
     if (player2Switch === true) {
@@ -451,13 +449,13 @@ function startGameFunc() {
             } else {
               bubbleSound2.play();
             }
-            if (player2Switch === true) {
-              player2Score.innerText = score2++;
-              bubblesArr1[i].counted = true;
-              bubblesArr1.splice(i--, 1);
-            }
+            // if (player2Switch === true) {
+            player2Score.innerText = score2++;
+            bubblesArr1[i].counted = true;
+            bubblesArr1.splice(i--, 1);
           }
         }
+        // }
       }
     }
   }
@@ -467,8 +465,9 @@ function startGameFunc() {
     // clear canvas after each frame
     context.clearRect(0, 0, canvas.width, canvas.height);
     //   invoke bubbles function to add a bubble every 50 frames
-    handleBubbles();
+
     if (level < 4) {
+      handleBubbles();
       player.updatePosition();
       player.draw();
       enemyHandler();
