@@ -18,9 +18,9 @@ canvas.height = 500;
 
 // initialze score for both players
 let score1 = 1;
-let score2 = 1;
+// let score2 = 1;
 let player1Score = document.getElementById("score-1");
-let player2Score = document.getElementById("score-2");
+// let player2Score = document.getElementById("score-2");
 
 player2Switch = false;
 gameOver = false;
@@ -75,8 +75,8 @@ function startGameFunc() {
   const playerSprite1 = new Image();
   playerSprite1.src = "./images/mermaid-art.png";
 
-  const playerSprite2 = new Image();
-  playerSprite2.src = "./images/merman-art.png";
+  // const playerSprite2 = new Image();
+  // playerSprite2.src = "./images/merman-art.png";
 
   class Players {
     constructor(spriteImg) {
@@ -157,16 +157,16 @@ function startGameFunc() {
   }
 
   const player = new Players(playerSprite1);
-  const player2 = new Players(playerSprite2);
+  // const player2 = new Players(playerSprite2);
 
   // bubbles to pop
   const bubblesArr = [];
-  const bubblesArr1 = [];
+  // const bubblesArr1 = [];
 
   const bubbleImage = new Image();
   bubbleImage.src = "./images/bubble_pop_frame_01.png";
-  const bubbleImage2 = new Image();
-  bubbleImage2.src = "./images/bubble_pop_frame_01.png";
+  // const bubbleImage2 = new Image();
+  // bubbleImage2.src = "./images/bubble_pop_frame_01.png";
   class Bubble {
     constructor(spriteImg, playerNum) {
       this.x = Math.random() * canvas.width;
@@ -222,8 +222,8 @@ function startGameFunc() {
   enemyImage2.src = "./images/Jellyfish.png";
   const enemyImage3 = new Image();
   enemyImage3.src = "./images/enemy_fish_yellow.png";
-  const enemyImage4 = new Image();
-  enemyImage4.src = "./images/Jellyfish.png";
+  // const enemyImage4 = new Image();
+  // enemyImage4.src = "./images/Jellyfish.png";
 
   // enemy contructor
 
@@ -307,11 +307,11 @@ function startGameFunc() {
     enemy3.draw();
     enemy3.update();
   }
-  const enemy4 = new Enemy(enemyImage4);
-  function enemyHandler4() {
-    enemy4.draw();
-    enemy4.update();
-  }
+  // const enemy4 = new Enemy(enemyImage4);
+  // function enemyHandler4() {
+  //   enemy4.draw();
+  //   enemy4.update();
+  // }
 
   // game over func
   function gameOverFunc() {
@@ -331,54 +331,57 @@ function startGameFunc() {
         canvas.style.backgroundSize = "800px 500px";
       }, 1000);
       level++;
-    } else if (level === 3) {
-      player2Switch = true;
+    } else if (level > 2) {
+      // player2Switch = true;
       setTimeout(() => {
-        context.fillText("Player 2 Start, Press Play", 120, 200);
-        canvas.style.backgroundImage = "url('./images/water-bg-1.jpg')";
-      }, 1000);
-      level++;
-    } else if (level === 4) {
-      console.log(`level ${level}`);
-      setTimeout(() => {
-        context.fillText("Level 5, Press Play to start level", 150, 300);
-        canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
-      }, 1000);
-      level++;
-    } else if (level === 5) {
-      console.log(`level ${level}`);
-      setTimeout(() => {
-        context.fillText("Level 6, Press Play to start level", 120, 200);
-      }, 1000);
-      level++;
-    } else if (level > 5) {
-      console.log(`level ${level}`);
-      console.log(`game over ${score1} ${score2}`);
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.fillText("GAME OVER", 120, 300);
+        // context.fillText("Player 2 Start, Press Play", 120, 200);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      context.fillText("GAME OVER, Score:" + (score1 - 1), 90, 100);
       canvas.style.backgroundImage =
         "url('./images/pink-background-sprites.jpg')";
+      }, 1000);
+      // level++;
+    // } else if (level === 4) {
+    //   console.log(`level ${level}`);
+    //   setTimeout(() => {
+    //     context.fillText("Game Over, Final Score" + (score1 - 1), 150, 300);
+    //     canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
+    //   }, 1000);
+    //   level++;
+    // } else if (level === 5) {
+    //   console.log(`level ${level}`);
+    //   setTimeout(() => {
+    //     context.fillText("Level 6, Press Play to start level", 120, 200);
+    //   }, 1000);
+    //   level++;
+    // } else if (level > 5) {
+    //   console.log(`level ${level}`);
+    //   console.log(`game over ${score1} ${score2}`);
+    //   context.clearRect(0, 0, canvas.width, canvas.height);
+    //   context.fillText("GAME OVER", 120, 300);
+    //   canvas.style.backgroundImage =
+    //     "url('./images/pink-background-sprites.jpg')";
 
-      if (score1 > score2) {
-        console.log("scores time");
-        context.fillText(
-          "Player 1 Wins With a Score of " + (score1 - 1),
-          120,
-          100
-        );
-      }
-      if (score2 > score1) {
-        context.fillText(
-          "Player 2 Wins With a Score of " + (score2 - 1),
-          120,
-          100
-        );
-      }
-      if (score1 === score2) {
-        context.fillText("It's a Tie! Score: " + (score2 - 1), 120, 100);
-      } else {
-        // console.log("error");
-      }
+    //   if (score1 > score2) {
+    //     console.log("scores time");
+    //     context.fillText(
+    //       "Player 1 Wins With a Score of " + (score1 - 1),
+    //       120,
+    //       100
+    //     );
+    //   }
+    //   if (score2 > score1) {
+    //     context.fillText(
+    //       "Player 2 Wins With a Score of " + (score2 - 1),
+    //       120,
+    //       100
+    //     );
+    //   }
+    //   if (score1 === score2) {
+    //     context.fillText("It's a Tie! Score: " + (score2 - 1), 120, 100);
+    //   } else {
+    //     // console.log("error");
+    //   }
     }
     gameOver = true;
   }
@@ -424,40 +427,40 @@ function startGameFunc() {
       }
     }
     // player 2 collision detection +bubble removal
-    if (gameFrame % 50 === 0 && player2Switch === true) {
-      // add a new bubble to the bubles array
-      console.log("player 2 bubbles should start");
-      bubblesArr1.push(new Bubble(bubbleImage2, player2));
-    }
-    //   loop through bubbles array and call the update and draw method for each bubble
-    if (player2Switch === true) {
-      console.log("player 2 bubbles");
-      for (let i = 0; i < bubblesArr1.length; i++) {
-        bubblesArr1[i].update();
-        bubblesArr1[i].draw();
-        // if bubble is out of canvas, splice it out, otherwise you'd have a huge array of bubbles
-        if (bubblesArr1[i] < 0) {
-          bubblesArr1.splice(i--, 1);
-        }
-        if (bubblesArr1[i].distance < bubblesArr1[i].radius + player2.radius) {
-          console.log("collision player2");
-          //   make sure the bubbles don't count for too many points on each collision
-          if (!bubblesArr1[i].counted) {
-            // bubble pop sounds
-            if (bubblesArr1[i].sound === "sound1") {
-              bubbleSound1.play();
-            } else {
-              bubbleSound2.play();
-            }
-            // if (player2Switch === true) {
-            player2Score.innerText = score2++;
-            bubblesArr1[i].counted = true;
-            bubblesArr1.splice(i--, 1);
-          }
-        }
+    // if (gameFrame % 50 === 0 && player2Switch === true) {
+    //   // add a new bubble to the bubles array
+    //   console.log("player 2 bubbles should start");
+    //   bubblesArr1.push(new Bubble(bubbleImage2, player2));
+    // }
+    // //   loop through bubbles array and call the update and draw method for each bubble
+    // if (player2Switch === true) {
+    //   console.log("player 2 bubbles");
+    //   for (let i = 0; i < bubblesArr1.length; i++) {
+    //     bubblesArr1[i].update();
+    //     bubblesArr1[i].draw();
+    //     // if bubble is out of canvas, splice it out, otherwise you'd have a huge array of bubbles
+    //     if (bubblesArr1[i] < 0) {
+    //       bubblesArr1.splice(i--, 1);
+    //     }
+    //     if (bubblesArr1[i].distance < bubblesArr1[i].radius + player2.radius) {
+    //       console.log("collision player2");
+    //       //   make sure the bubbles don't count for too many points on each collision
+    //       if (!bubblesArr1[i].counted) {
+    //         // bubble pop sounds
+    //         if (bubblesArr1[i].sound === "sound1") {
+    //           bubbleSound1.play();
+    //         } else {
+    //           bubbleSound2.play();
+    //         }
+    //         // if (player2Switch === true) {
+    //         player2Score.innerText = score2++;
+    //         bubblesArr1[i].counted = true;
+    //         bubblesArr1.splice(i--, 1);
+    //       }
         // }
-      }
-    }
+        // }
+      // }
+    // }
   }
 
   // animation loop
@@ -482,20 +485,6 @@ function startGameFunc() {
       enemyHandler2();
       enemyHandler3();
     }
-    if (level >= 4) {
-      player2Switch = true;
-      player2.updatePosition();
-      player2.draw();
-      enemyHandler();
-      handleBubbles();
-    }
-    if (level === 5) {
-      enemyHandler2();
-    }
-    if (level === 6) {
-      enemyHandler3();
-      enemyHandler4();
-    }
 
     //   increment the game frame, increases endlessly as game runs
     //   use to add periodic events to game
@@ -504,7 +493,7 @@ function startGameFunc() {
     if (!gameOver)
       //   built in JS method. Creates a recursive loop
       requestAnimationFrame(animation);
-    if (level < 7) gameOver = false;
+    if (level < 5) gameOver = false;
   }
 
   animation();
