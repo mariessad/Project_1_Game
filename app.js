@@ -219,7 +219,7 @@ function startGameFunc() {
   const enemyImage = new Image();
   enemyImage.src = "./images/enemy_fish_pink.png";
   const enemyImage2 = new Image();
-  enemyImage2.src = "./images/Jellyfish.png";
+  enemyImage2.src = "./images/jellyfish.png";
   const enemyImage3 = new Image();
   enemyImage3.src = "./images/enemy_fish_yellow.png";
   // const enemyImage4 = new Image();
@@ -336,52 +336,52 @@ function startGameFunc() {
       setTimeout(() => {
         // context.fillText("Player 2 Start, Press Play", 120, 200);
         context.clearRect(0, 0, canvas.width, canvas.height);
-      context.fillText("GAME OVER, Score:" + (score1 - 1), 90, 100);
-      canvas.style.backgroundImage =
-        "url('./images/pink-background-sprites.jpg')";
+        context.fillText("GAME OVER, Score:" + (score1 - 1), 90, 100);
+        canvas.style.backgroundImage =
+          "url('./images/pink-background-sprites.jpg')";
       }, 1000);
       // level++;
-    // } else if (level === 4) {
-    //   console.log(`level ${level}`);
-    //   setTimeout(() => {
-    //     context.fillText("Game Over, Final Score" + (score1 - 1), 150, 300);
-    //     canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
-    //   }, 1000);
-    //   level++;
-    // } else if (level === 5) {
-    //   console.log(`level ${level}`);
-    //   setTimeout(() => {
-    //     context.fillText("Level 6, Press Play to start level", 120, 200);
-    //   }, 1000);
-    //   level++;
-    // } else if (level > 5) {
-    //   console.log(`level ${level}`);
-    //   console.log(`game over ${score1} ${score2}`);
-    //   context.clearRect(0, 0, canvas.width, canvas.height);
-    //   context.fillText("GAME OVER", 120, 300);
-    //   canvas.style.backgroundImage =
-    //     "url('./images/pink-background-sprites.jpg')";
+      // } else if (level === 4) {
+      //   console.log(`level ${level}`);
+      //   setTimeout(() => {
+      //     context.fillText("Game Over, Final Score" + (score1 - 1), 150, 300);
+      //     canvas.style.backgroundImage = "url('./images/water-bg-2.jpg')";
+      //   }, 1000);
+      //   level++;
+      // } else if (level === 5) {
+      //   console.log(`level ${level}`);
+      //   setTimeout(() => {
+      //     context.fillText("Level 6, Press Play to start level", 120, 200);
+      //   }, 1000);
+      //   level++;
+      // } else if (level > 5) {
+      //   console.log(`level ${level}`);
+      //   console.log(`game over ${score1} ${score2}`);
+      //   context.clearRect(0, 0, canvas.width, canvas.height);
+      //   context.fillText("GAME OVER", 120, 300);
+      //   canvas.style.backgroundImage =
+      //     "url('./images/pink-background-sprites.jpg')";
 
-    //   if (score1 > score2) {
-    //     console.log("scores time");
-    //     context.fillText(
-    //       "Player 1 Wins With a Score of " + (score1 - 1),
-    //       120,
-    //       100
-    //     );
-    //   }
-    //   if (score2 > score1) {
-    //     context.fillText(
-    //       "Player 2 Wins With a Score of " + (score2 - 1),
-    //       120,
-    //       100
-    //     );
-    //   }
-    //   if (score1 === score2) {
-    //     context.fillText("It's a Tie! Score: " + (score2 - 1), 120, 100);
-    //   } else {
-    //     // console.log("error");
-    //   }
+      //   if (score1 > score2) {
+      //     console.log("scores time");
+      //     context.fillText(
+      //       "Player 1 Wins With a Score of " + (score1 - 1),
+      //       120,
+      //       100
+      //     );
+      //   }
+      //   if (score2 > score1) {
+      //     context.fillText(
+      //       "Player 2 Wins With a Score of " + (score2 - 1),
+      //       120,
+      //       100
+      //     );
+      //   }
+      //   if (score1 === score2) {
+      //     context.fillText("It's a Tie! Score: " + (score2 - 1), 120, 100);
+      //   } else {
+      //     // console.log("error");
+      //   }
     }
     gameOver = true;
   }
@@ -457,9 +457,9 @@ function startGameFunc() {
     //         bubblesArr1[i].counted = true;
     //         bubblesArr1.splice(i--, 1);
     //       }
-        // }
-        // }
-      // }
+    // }
+    // }
+    // }
     // }
   }
 
