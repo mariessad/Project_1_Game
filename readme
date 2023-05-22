@@ -1,14 +1,12 @@
 Mermaid-themed bubble pop game
-Two-player
+1-player
 
-Each player gets three rounds to pop bubbles and score points
-after the first 3 rounds, the 2nd player gets their turn to play 3 rounds
+player gets three rounds to pop bubbles and score points
 
 each level increases difficulty by adding more enemies 
 when the player hits an enemy, that round stops and moves on to the next round.
 
-winner with the greatest number of points is determined after both players finish their rounds
 
 Built with HTML CSS JavaScript, first time using JS Canvas
 
-player images are custom artwork made with procreate on the Ipad
+player image is custom artwork made with procreate on the Ipad
