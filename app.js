@@ -222,8 +222,8 @@ function startGameFunc() {
   enemyImage2.src = "./images/jellyfish.png";
   const enemyImage3 = new Image();
   enemyImage3.src = "./images/enemy_fish_yellow.png";
-  // const enemyImage4 = new Image();
-  // enemyImage4.src = "./images/Jellyfish.png";
+  const enemyImage4 = new Image();
+  enemyImage4.src = "./images/Jellyfish.png";
 
   // enemy contructor
 
@@ -307,11 +307,11 @@ function startGameFunc() {
     enemy3.draw();
     enemy3.update();
   }
-  // const enemy4 = new Enemy(enemyImage4);
-  // function enemyHandler4() {
-  //   enemy4.draw();
-  //   enemy4.update();
-  // }
+  const enemy4 = new Enemy(enemyImage4);
+  function enemyHandler4() {
+    enemy4.draw();
+    enemy4.update();
+  }
 
   // game over func
   function gameOverFunc() {
@@ -478,11 +478,11 @@ function startGameFunc() {
 
     if (level === 2) {
       // add another enemy for level2 //
-      console.log("2nd enemy appears");
+      // console.log("2nd enemy appears");
       enemyHandler2();
     }
     if (level === 3) {
-      enemyHandler2();
+      enemyHandler4();
       enemyHandler3();
     }
 
